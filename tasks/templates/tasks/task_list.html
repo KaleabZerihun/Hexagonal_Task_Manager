@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hexagonal ToDo App</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --accent: #4a90e2;
+      --accent-hover: #357abd;
+      --text: #333;
+      --muted: #777;
+      --overdue: #ffe3e3;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow-y: auto;
+    }
+
+    .container {
+      background: var(--card-bg);
+      width: 550px;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      
+    }
+
+    h1 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    input, select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      background-color: var(--accent);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--accent-hover);
+    }
+
+    li {
+      background: #f9fafc;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .overdue {
+      background-color: var(--overdue);
+    }
+
+    .task-actions {
+      float: right;
+    }
+
+    a {
+      text-decoration: none;
+      margin-left: 8px;
+      color: #4a90e2;
+    }
+
+    a.delete {
+      color: #ff4d4f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> Hexagonal ToDo</h1>
+    {% if error %}
+        <div style="background-color:#ffe3e3; color:#b00020; padding:10px; border-radius:8px; margin-bottom:15px;">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="Task title..." required>
+      <input type="date" name="due_date">
+      <select name="priority">
+        <option value="low">Low</option>
+        <option value="normal" selected>Normal</option>
+        <option value="high">High</option>
+      </select>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <ul>
+      {% for task in tasks %}
+      <li class="{% if task.is_overdue %}overdue{% endif %}">
+        <strong>{{ task.title }}</strong>
+        <div>Priority: {{ task.priority|title }}</div>
+        {% if task.due_date %}
+          <div>Due: {{ task.due_date }}</div>
+        {% endif %}
+        {% if task.is_overdue %}
+          <div style="color:red;"> Overdue</div>
+        {% endif %}
+        <div class="task-actions">
+          <a href="{% url 'edit_task' task.id %}">Edit</a>
+          <a href="{% url 'delete_task' task.id %}" class="delete">Delete</a>
+        </div>
+      </li>
+      {% empty %}
+        <li>No tasks yet! Add one above </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

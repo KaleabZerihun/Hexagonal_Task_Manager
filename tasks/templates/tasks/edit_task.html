@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Task</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+
+    input, select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      background: #4a90e2;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 12px;
+      text-decoration: none;
+      color: #4a90e2;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Edit Task</h2>
+    {% if error %}
+  <div style="background-color:#ffe3e3; color:#b00020; padding:10px; border-radius:8px; margin-bottom:15px;">
+    {{ error }}
+  </div>
+{% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="title" value="{{ task.title }}" required>
+      <input type="date" name="due_date" value="{{ task.due_date }}">
+      <select name="priority">
+        <option value="low" {% if task.priority == 'low' %}selected{% endif %}>Low</option>
+        <option value="normal" {% if task.priority == 'normal' %}selected{% endif %}>Normal</option>
+        <option value="high" {% if task.priority == 'high' %}selected{% endif %}>High</option>
+      </select>
+      <button type="submit">Save Changes</button>
+    </form>
+    <a href="{% url 'task_list' %}">Back to list</a>
+  </div>
+</body>
+</html>
