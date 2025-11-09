@@ -79,7 +79,8 @@
     }
 
     .overdue {
-      background-color: var(--overdue);
+      background-color: #ffe6e6;
+      color: red;
     }
 
     .task-actions {
@@ -120,19 +121,17 @@
 
     <ul>
       {% for task in tasks %}
-      <li class="{% if task.is_overdue %}overdue{% endif %}">
-        <strong>{{ task.title }}</strong>
-        <div>Priority: {{ task.priority|title }}</div>
+
+      <li class="task-item {% if task.is_overdue %}overdue{% endif %}">
+
+        <span>{{ task.title }}</span>
+
         {% if task.due_date %}
-          <div>Due: {{ task.due_date }}</div>
+          <small>Due: {{ task.due_date }}</small>
         {% endif %}
-        {% if task.is_overdue %}
-          <div style="color:red;"> Overdue</div>
-        {% endif %}
-        <div class="task-actions">
-          <a href="{% url 'edit_task' task.id %}">Edit</a>
-          <a href="{% url 'delete_task' task.id %}" class="delete">Delete</a>
-        </div>
+        <span class="priority">{{ task.priority|title }}</span>
+        <a href="{% url 'edit_task' task.id %}" class="edit-btn">Edit</a>
+        <a href="{% url 'delete_task' task.id %}" class="delete-btn">Delete</a>
       </li>
       {% empty %}
         <li>No tasks yet! Add one above </li>

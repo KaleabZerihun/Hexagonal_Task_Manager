@@ -58,7 +58,7 @@
     <form method="POST">
       {% csrf_token %}
       <input type="text" name="title" value="{{ task.title }}" required>
-      <input type="date" name="due_date" value="{{ task.due_date }}">
+      <input type="date" name="due_date" value="{{ due_date_value }}">
       <select name="priority">
         <option value="low" {% if task.priority == 'low' %}selected{% endif %}>Low</option>
         <option value="normal" {% if task.priority == 'normal' %}selected{% endif %}>Normal</option>

@@ -32,6 +32,10 @@ def delete_task(request, task_id):
 def edit_task(request, task_id):
     task = service.get_task(task_id)
     error = None
+    if task.due_date:
+            due_date_value = task.due_date.strftime("%Y-%m-%d")
+    else:
+        due_date_value = ""
 
     if request.method == 'POST':
         title = request.POST.get('title', '')
@@ -44,4 +48,4 @@ def edit_task(request, task_id):
         except Exception as e:
             error = str(e)
 
-    return render(request, 'tasks/edit_task.html', {'task': task, 'error': error})
+    return render(request, 'tasks/edit_task.html', {'task': task,'due_date_value': due_date_value, 'error': error})

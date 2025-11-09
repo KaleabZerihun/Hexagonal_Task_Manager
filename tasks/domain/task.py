@@ -3,13 +3,13 @@ from datetime import date
 # heart of the project.
 class Task:
     #when creating a task here are the rules to follow 
-    def __init__(self, id=None, title="", is_done=False, due_date=None, priority="normal"):
+    def __init__(self, id=None, title="", is_done=False, due_date=None, priority="normal", validate_due_date=True):
         if not title.strip():
             raise ValueError("Task title cannot be empty.")
         if priority not in ["low", "normal", "high"]:
             raise ValueError("Priority must be 'low', 'normal', or 'high'.")
 
-        if due_date and due_date < date.today():
+        if validate_due_date and due_date and due_date < date.today():
             raise ValueError("Due date cannot be in the past.")
         self.id = id
         self.title = title

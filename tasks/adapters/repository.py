@@ -11,6 +11,7 @@ class TaskRepository(TaskRepositoryPort):
                 is_done=t.is_done,
                 due_date=t.due_date,
                 priority=t.priority,
+                validate_due_date=False,
             )
             for t in TaskModel.objects.all()
         ]
@@ -34,6 +35,7 @@ class TaskRepository(TaskRepositoryPort):
             is_done=t.is_done,
             due_date=t.due_date,
             priority=t.priority,
+            validate_due_date=False,
         )
 
     def update_task(self, task: Task):
