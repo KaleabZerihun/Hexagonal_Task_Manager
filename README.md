@@ -21,7 +21,7 @@ I built this project to better understand how software architecture can make an 
 
 I built this app to demonstrate how Hexagonal Architecture works in a real project. A normal Django project can become hard to manage when the business logic, database code, and web logic are all mixed together.
 
-Using Hexagonal Architecture helped us separate the main task logic from the outside tools. This made the project cleaner, easier to understand, and easier to test. It also showed how a small app can still use strong software architecture principles.
+Using Hexagonal Architecture helped me separate the main task logic from the outside tools. This made the project cleaner, easier to understand, and easier to test.
 
 ## Technologies Used
 
