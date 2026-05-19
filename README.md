@@ -4,7 +4,7 @@ This project is a simple To-Do application built with Django using Hexagonal Arc
 
 The app allows users to create, view, update, complete, and delete tasks. It also includes logic for handling overdue tasks, so users can easily see which tasks need attention.
 
-We built this project to better understand how software architecture can make an application easier to maintain, test, and expand. Instead of putting all the logic directly inside Django views or models, the project separates responsibilities into different layers. This makes the app more flexible because the core task logic can work independently from Django or the database.
+I built this project to better understand how software architecture can make an application easier to maintain, test, and expand. Instead of putting all the logic directly inside Django views or models, the project separates responsibilities into different layers. This makes the app more flexible because the core task logic can work independently from Django or the database.
 
 ## Features
 
@@ -17,9 +17,9 @@ We built this project to better understand how software architecture can make an
 - Organized using Hexagonal Architecture
 - Built with Django and SQLite
 
-## Why We Built This App
+## Why I Built This App
 
-We built this app to demonstrate how Hexagonal Architecture works in a real project. A normal Django project can become hard to manage when the business logic, database code, and web logic are all mixed together.
+I built this app to demonstrate how Hexagonal Architecture works in a real project. A normal Django project can become hard to manage when the business logic, database code, and web logic are all mixed together.
 
 Using Hexagonal Architecture helped us separate the main task logic from the outside tools. This made the project cleaner, easier to understand, and easier to test. It also showed how a small app can still use strong software architecture principles.
 
